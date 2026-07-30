@@ -1,0 +1,18 @@
+CREATE OR REPLACE FUNCTION GET_TOTAL_STOCK_VALUE 
+RETURN NUMBER IS
+    v_total_value NUMBER(10,2);
+BEGIN
+    SELECT SUM(PRICE * QUANTITY)
+    INTO v_total_value
+    FROM PRODUCT;
+    
+    RETURN NVL(v_total_value, 0);
+END GET_TOTAL_STOCK_VALUE;
+/
+
+-- Test execution block
+SET SERVEROUTPUT ON;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Total Stock Valuation: ' || GET_TOTAL_STOCK_VALUE);
+END;
+/
